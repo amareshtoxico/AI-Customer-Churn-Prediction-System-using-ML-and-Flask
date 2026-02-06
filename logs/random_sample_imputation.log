@@ -1,0 +1,113 @@
+2026-02-06 11:53:19,209 - INFO - Total rows in training data : (5634, 20)
+2026-02-06 11:53:19,209 - INFO - Total rows in testing data : (1409, 20)
+2026-02-06 11:53:19,209 - INFO - Before technique X_train : Index(['gender', 'SeniorCitizen', 'Partner', 'Dependents', 'tenure',
+       'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',
+       'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV',
+       'StreamingMovies', 'Contract', 'PaperlessBilling', 'PaymentMethod',
+       'MonthlyCharges', 'TotalCharges', 'SIM_Provider'],
+      dtype='str')
+2026-02-06 11:53:19,209 - INFO - Before technique X_test : Index(['gender', 'SeniorCitizen', 'Partner', 'Dependents', 'tenure',
+       'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',
+       'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV',
+       'StreamingMovies', 'Contract', 'PaperlessBilling', 'PaymentMethod',
+       'MonthlyCharges', 'TotalCharges', 'SIM_Provider'],
+      dtype='str')
+2026-02-06 11:53:19,212 - INFO - Before technique X_train : gender               0
+SeniorCitizen        0
+Partner              0
+Dependents           0
+tenure               0
+PhoneService         0
+MultipleLines        0
+InternetService      0
+OnlineSecurity       0
+OnlineBackup         0
+DeviceProtection     0
+TechSupport          0
+StreamingTV          0
+StreamingMovies      0
+Contract             0
+PaperlessBilling     0
+PaymentMethod        0
+MonthlyCharges       0
+TotalCharges        10
+SIM_Provider         0
+dtype: int64
+2026-02-06 11:53:19,214 - INFO - Before technique X_test : gender              0
+SeniorCitizen       0
+Partner             0
+Dependents          0
+tenure              0
+PhoneService        0
+MultipleLines       0
+InternetService     0
+OnlineSecurity      0
+OnlineBackup        0
+DeviceProtection    0
+TechSupport         0
+StreamingTV         0
+StreamingMovies     0
+Contract            0
+PaperlessBilling    0
+PaymentMethod       0
+MonthlyCharges      0
+TotalCharges        1
+SIM_Provider        0
+dtype: int64
+2026-02-06 11:53:19,217 - INFO - Train Column name : TotalCharges
+2026-02-06 11:53:19,221 - INFO - After technique X_train : Index(['gender', 'SeniorCitizen', 'Partner', 'Dependents', 'tenure',
+       'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',
+       'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV',
+       'StreamingMovies', 'Contract', 'PaperlessBilling', 'PaymentMethod',
+       'MonthlyCharges', 'SIM_Provider', 'TotalCharges_replaced'],
+      dtype='str')
+2026-02-06 11:53:19,221 - INFO - After technique X_test : Index(['gender', 'SeniorCitizen', 'Partner', 'Dependents', 'tenure',
+       'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',
+       'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV',
+       'StreamingMovies', 'Contract', 'PaperlessBilling', 'PaymentMethod',
+       'MonthlyCharges', 'SIM_Provider', 'TotalCharges_replaced'],
+      dtype='str')
+2026-02-06 11:53:19,224 - INFO - After technique X_train : gender                   0
+SeniorCitizen            0
+Partner                  0
+Dependents               0
+tenure                   0
+PhoneService             0
+MultipleLines            0
+InternetService          0
+OnlineSecurity           0
+OnlineBackup             0
+DeviceProtection         0
+TechSupport              0
+StreamingTV              0
+StreamingMovies          0
+Contract                 0
+PaperlessBilling         0
+PaymentMethod            0
+MonthlyCharges           0
+SIM_Provider             0
+TotalCharges_replaced    0
+dtype: int64
+2026-02-06 11:53:19,226 - INFO - After technique X_test : gender                   0
+SeniorCitizen            0
+Partner                  0
+Dependents               0
+tenure                   0
+PhoneService             0
+MultipleLines            0
+InternetService          0
+OnlineSecurity           0
+OnlineBackup             0
+DeviceProtection         0
+TechSupport              0
+StreamingTV              0
+StreamingMovies          0
+Contract                 0
+PaperlessBilling         0
+PaymentMethod            0
+MonthlyCharges           0
+SIM_Provider             0
+TotalCharges_replaced    0
+dtype: int64
+2026-02-06 11:53:19,226 - INFO - Total rows in training data : (5634, 20)
+2026-02-06 11:53:19,226 - INFO - Total rows in testing data : (1409, 20)

@@ -1,0 +1,17 @@
+2026-02-06 11:53:19,254 - INFO - Index(['SeniorCitizen', 'tenure', 'MonthlyCharges', 'TotalCharges_replaced'], dtype='str') -> (5634, 4)
+2026-02-06 11:53:19,254 - INFO - Index(['SeniorCitizen', 'tenure', 'MonthlyCharges', 'TotalCharges_replaced'], dtype='str') -> (1409, 4)
+2026-02-06 11:53:19,256 - INFO - columns we need to remove from constant technique: Index([], dtype='str')
+2026-02-06 11:53:19,258 - INFO - columns we need to remove from constant technique: Index([], dtype='str')
+2026-02-06 11:53:19,259 - INFO - Index(['SeniorCitizen', 'tenure', 'MonthlyCharges', 'TotalCharges_replaced'], dtype='str') -> (5634, 4)
+2026-02-06 11:53:19,259 - INFO - Index(['SeniorCitizen', 'tenure', 'MonthlyCharges', 'TotalCharges_replaced'], dtype='str') -> (1409, 4)
+2026-02-06 11:53:19,260 - INFO - <StringArray>
+['No', 'Yes']
+Length: 2, dtype: str
+2026-02-06 11:53:19,260 - INFO - [0 1]
+2026-02-06 11:53:19,420 - INFO - SeniorCitizen             1.288715e-28
+MonthlyCharges            2.936101e-46
+TotalCharges_replaced     4.129984e-49
+tenure                   3.780534e-157
+dtype: float64
+2026-02-06 11:53:19,421 - INFO - Index(['tenure', 'MonthlyCharges', 'TotalCharges_replaced'], dtype='str') -> (5634, 3)
+2026-02-06 11:53:19,421 - INFO - Index(['tenure', 'MonthlyCharges', 'TotalCharges_replaced'], dtype='str') -> (1409, 3)
