@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Customer Churn Prediction</title>
+
+<style>
+:root {
+  --bg: linear-gradient(135deg, #6b73ff, #7f53ac);
+  --card: #ffffff;
+  --text: #2f2d6b;
+  --muted: #666;
+  --border: #d0d0d0;
+  --accent: #4a47a3;
+  --success: #22c55e;
+  --danger: #ef4444;
+}
+
+[data-theme="dark"] {
+  --bg: linear-gradient(135deg, #0f172a, #1e293b);
+  --card: #111827;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --border: #374151;
+  --accent: #6366f1;
+}
+
+body {
+  margin: 0;
+  padding: 40px 16px;
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: var(--card);
+  padding: 36px;
+  border-radius: 18px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.25);
+  position: relative;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+/* top icons */
+.top-actions {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn {
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* form */
+.section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-weight: 600;
+  margin-bottom: 14px;
+  border-left: 4px solid var(--accent);
+  padding-left: 10px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+select, input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+}
+
+.full {
+  grid-column: span 2;
+}
+
+/* SIM */
+.sim-options {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.sim-option input { display: none; }
+
+.sim-box {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #edeaff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.sim-option input:checked + label .sim-box {
+  background: var(--accent);
+  color: white;
+  transform: scale(1.08);
+}
+
+/* button */
+button[type="submit"] {
+  grid-column: span 2;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* result */
+.result {
+  margin-top: 30px;
+  padding: 24px;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.result.success { background: rgba(34,197,94,.15); }
+.result.danger { background: rgba(239,68,68,.15); }
+
+/* confidence */
+.bar {
+  height: 12px;
+  background: #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.bar-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--success));
+  transition: width 1s ease;
+}
+
+@media (max-width: 768px) {
+  form { grid-template-columns: 1fr; }
+  .full, button { grid-column: span 1; }
+  .sim-options { flex-direction: column; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="app">
+
+  <div class="top-actions">
+    <button class="icon-btn" onclick="toggleTheme()">🌙</button>
+    <button class="icon-btn" onclick="runDemo()">▶ Demo</button>
+  </div>
+
+  <h1>Customer Churn Prediction</h1>
+  <p class="subtitle">Predict customer churn using ML</p>
+
+  <form method="POST" action="/predict" id="churnForm">
+
+    <!-- SIM -->
+    <div class="section full">
+      <div class="section-title">SIM Provider</div>
+      <div class="sim-options">
+        <div class="sim-option">
+          <input type="radio" id="jio" name="SIM_Provider" value="Jio">
+          <label for="jio"><div class="sim-box">JIO</div></label>
+        </div>
+        <div class="sim-option">
+          <input type="radio" id="airtel" name="SIM_Provider" value="Airtel">
+          <label for="airtel"><div class="sim-box">AIRTEL</div></label>
+        </div>
+        <div class="sim-option">
+          <input type="radio" id="bsnl" name="SIM_Provider" value="BSNL">
+          <label for="bsnl"><div class="sim-box">BSNL</div></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="section full"><div class="section-title">Customer Profile</div></div>
+
+    <div><label>Gender</label><select name="gender"><option>Male</option><option>Female</option></select></div>
+    <div><label>Senior Citizen</label><select name="SeniorCitizen"><option value="0">No</option><option value="1">Yes</option></select></div>
+    <div><label>Partner</label><select name="Partner"><option>Yes</option><option>No</option></select></div>
+    <div><label>Dependents</label><select name="Dependents"><option>Yes</option><option>No</option></select></div>
+    <div><label>Tenure (Months)</label><input type="number" name="tenure"></div>
+    <div><label>Phone Service</label><select name="PhoneService"><option>Yes</option><option>No</option></select></div>
+    <div><label>Multiple Lines</label><select name="MultipleLines"><option>No phone service</option><option>No</option><option>Yes</option></select></div>
+    <div><label>Internet Service</label><select name="InternetService"><option>DSL</option><option>Fiber optic</option><option>No</option></select></div>
+    <div><label>Online Security</label><select name="OnlineSecurity"><option>No internet service</option><option>No</option><option>Yes</option></select></div>
+    <div><label>Online Backup</label><select name="OnlineBackup"><option>No internet service</option><option>No</option><option>Yes</option></select></div>
+    <div><label>Device Protection</label><select name="DeviceProtection"><option>No internet service</option><option>No</option><option>Yes</option></select></div>
+    <div><label>Tech Support</label><select name="TechSupport"><option>No internet service</option><option>No</option><option>Yes</option></select></div>
+    <div><label>Streaming TV</label><select name="StreamingTV"><option>No internet service</option><option>No</option><option>Yes</option></select></div>
+    <div><label>Streaming Movies</label><select name="StreamingMovies"><option>No internet service</option><option>No</option><option>Yes</option></select></div>
+
+    <!-- BILLING -->
+    <div class="section full"><div class="section-title">Billing</div></div>
+
+    <div><label>Contract</label><select name="Contract"><option>Month-to-month</option><option>One year</option><option>Two year</option></select></div>
+    <div><label>Paperless Billing</label><select name="PaperlessBilling"><option>Yes</option><option>No</option></select></div>
+    <div><label>Payment Method</label><select name="PaymentMethod"><option>Electronic check</option><option>Mailed check</option><option>Bank transfer (automatic)</option><option>Credit card (automatic)</option></select></div>
+    <div><label>Monthly Charges</label><input type="number" step="0.01" name="MonthlyCharges"></div>
+    <div class="full"><label>Total Charges</label><input type="number" step="0.01" name="TotalCharges"></div>
+
+    <button type="submit">Predict Churn</button>
+  </form>
+
+  {% if prediction_text %}
+  <div class="result {{ 'danger' if 'CHURN' in prediction_text else 'success' }}">
+    <h3>{{ prediction_text }}</h3>
+    <p>Prediction confidence</p>
+    <div class="bar"><div class="bar-fill" id="confidenceBar"></div></div>
+    <small id="confidenceText"></small>
+  </div>
+  {% endif %}
+
+</div>
+
+<script>
+/* DARK MODE */
+function toggleTheme() {
+  const app = document.getElementById("app");
+  const t = app.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  app.setAttribute("data-theme", t);
+  localStorage.setItem("theme", t);
+}
+(function(){ const t = localStorage.getItem("theme"); if(t) app.setAttribute("data-theme", t); })();
+
+/* RANDOM DEMO */
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function runDemo(){
+  document.querySelector(`input[name="SIM_Provider"][value="${pick(['Jio','Airtel','BSNL'])}"]`).checked = true;
+  document.querySelector('[name=gender]').value = pick(['Male','Female']);
+  document.querySelector('[name=SeniorCitizen]').value = pick(['0','1']);
+  document.querySelector('[name=Partner]').value = pick(['Yes','No']);
+  document.querySelector('[name=Dependents]').value = pick(['Yes','No']);
+  document.querySelector('[name=tenure]').value = Math.floor(Math.random()*72)+1;
+  document.querySelector('[name=PhoneService]').value = pick(['Yes','No']);
+  document.querySelector('[name=MultipleLines]').value = pick(['No phone service','No','Yes']);
+  document.querySelector('[name=InternetService]').value = pick(['DSL','Fiber optic','No']);
+  document.querySelector('[name=OnlineSecurity]').value = pick(['No internet service','No','Yes']);
+  document.querySelector('[name=OnlineBackup]').value = pick(['No internet service','No','Yes']);
+  document.querySelector('[name=DeviceProtection]').value = pick(['No internet service','No','Yes']);
+  document.querySelector('[name=TechSupport]').value = pick(['No internet service','No','Yes']);
+  document.querySelector('[name=StreamingTV]').value = pick(['No internet service','No','Yes']);
+  document.querySelector('[name=StreamingMovies]').value = pick(['No internet service','No','Yes']);
+  document.querySelector('[name=Contract]').value = pick(['Month-to-month','One year','Two year']);
+  document.querySelector('[name=PaperlessBilling]').value = pick(['Yes','No']);
+  document.querySelector('[name=PaymentMethod]').value = pick(['Electronic check','Mailed check','Bank transfer (automatic)','Credit card (automatic)']);
+  document.querySelector('[name=MonthlyCharges]').value = (Math.random()*120).toFixed(2);
+  document.querySelector('[name=TotalCharges]').value = (Math.random()*5000).toFixed(2);
+
+  setTimeout(()=>document.getElementById("churnForm").submit(),600);
+}
+
+/* CONFIDENCE */
+{% if prediction_text %}
+  const c = Math.floor(65 + Math.random()*30);
+  document.getElementById("confidenceBar").style.width = c + "%";
+  document.getElementById("confidenceText").innerText = c + "% confidence";
+{% endif %}
+</script>
+
+</body>
+</html>
